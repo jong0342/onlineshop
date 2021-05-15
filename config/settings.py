@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0&g_t^3hcyi!3he2z2w@9ypq2w%^h8k#vce*zvh$@ropjhc3d='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jingjin0342.pythonanywhere.com']
 
 
 # Application definition
@@ -142,11 +142,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-
+AUTH_USER_MODEL = 'accounts.User'
 
 AUTHNTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'accounts.authentication.PersonaAuthenticationBackend',
 ]
 SITE_ID = 1
 
@@ -193,3 +194,5 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 STATIC_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_ROOT = os.path.join(
+    BASE_DIR, f'http://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}')
