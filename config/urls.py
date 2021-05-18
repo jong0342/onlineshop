@@ -16,17 +16,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
-from shop.views import kakao_callback, kakao_login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('rest_auth.urls')),
-    path('accounts/registration/', include('rest_auth.registration.urls')),
     path('', include('shop.urls')),
-    url(r'account/registration/confirm-email/(?P<key>.+)/&',  name='confirm_email'),
     path('accounts/', include('allauth.urls')),
-    path('accounts/login/kakao/', kakao_login, name='kakao_login'),
-    path('http://127.0.0.1/accounts/login/kakao/callback',
-         kakao_callback, name='kakao_callback'),
+    
 ]

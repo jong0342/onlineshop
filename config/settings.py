@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0&g_t^3hcyi!3he2z2w@9ypq2w%^h8k#vce*zvh$@ropjhc3d='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['jingjin0342.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,20 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
 
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_auth.registration',
 
-    'accounts',
 
     'allauth.socialaccount.providers.naver',
-    'allauth.socialaccount.providers.kakao',
     
 ]
 
@@ -142,12 +135,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-AUTH_USER_MODEL = 'accounts.User'
-
 AUTHNTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-    'accounts.authentication.PersonaAuthenticationBackend',
 ]
 SITE_ID = 1
 
@@ -167,32 +157,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_DEFAULT_ACL = 'public-read'
 AWS_LOCATION = ''
 
-SOCIALACCOUNT_PROVIDERS = {
-    'kakao': {
-        'APP': {
-            'client_id': '6c1042dc99f9410a61b1726c0bf6c6ae',
-            'secret': 582842,
-            'key': ''
-        }
-    }
-}
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ],
-}
-
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
-LOGIN_REDIRECT_URL = "/"
-ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
-ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 STATIC_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATIC_ROOT = os.path.join(
-    BASE_DIR, f'http://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}')
+
+DEFAULT_FILE_STORAGE = 'config.s3media.MediaStorage'
