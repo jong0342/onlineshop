@@ -26,7 +26,7 @@ SECRET_KEY = '0&g_t^3hcyi!3he2z2w@9ypq2w%^h8k#vce*zvh$@ropjhc3d='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.compute.amazonaws.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -163,3 +163,5 @@ STATIC_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 DEFAULT_FILE_STORAGE = 'config.s3media.MediaStorage'
+
+CART_ID = 'cart_items'
